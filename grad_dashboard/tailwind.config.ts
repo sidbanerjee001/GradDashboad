@@ -11,6 +11,7 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        dark_background: "var(--dark_background)",
         subtext: "#999999",
       },
       fontFamily: {
