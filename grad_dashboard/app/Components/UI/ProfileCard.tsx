@@ -2,6 +2,7 @@ import Image from "next/image";
 import myImage from './headshot_1.jpg';
 
 import { motion } from "framer-motion"
+import { useRouter } from "next/navigation";
 
 interface ProfileCardProps {
     name?: string;
@@ -12,6 +13,8 @@ interface ProfileCardProps {
 }
 
 const ProfileCard: React.FC<ProfileCardProps> = ({name = "Placeholder", degree = "B.A. Default Degree", grad_date = "1900", location = "Los Angeles, CA", tags = []}) => {
+    const router = useRouter();
+
     return (
         <>
             <div id ="card-wrapper" className="mt-[40px] bg-[#282828] w-[300px] rounded-md relative drop-shadow-md hover:drop-shadow-xl transition ease-in-out duration-300">
@@ -56,9 +59,9 @@ const ProfileCard: React.FC<ProfileCardProps> = ({name = "Placeholder", degree =
 
                     {/* Footer Arrow */}
                     <div id="card-footer" className="absolute bottom-0 right-0">
-                        <button className="m-4">
+                        <button className="m-4" onClick={() => router.push('/profiles/' + name)}>
                             <motion.div
-                                whileHover={{scale: 1.2}}
+                                whileHover={{x: 5}}
                                 transition={{
                                 duration: 0.75,
                                 ease: [0, 0.71, 0.2, 1.01]

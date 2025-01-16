@@ -16,12 +16,13 @@ export default function Schools() {
         <div id="hero" className="mt-[150px]">
             <TypingText text="Alumni Profiles" speed={15} classes="text-5xl" />
         </div>
-        <div id="profiles" className="flex flex-row justify-content flex-wrap justify-between content-between">
+        <div id="profiles" className="grid grid-cols-3">
             <ProfileCard tags={["Chemical Engineering", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2", "test5"]}/>
             <ProfileCard tags={["Chemical Engin.", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2"]}/>
             <ProfileCard tags={["Chemical Engin.", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2", "test5", "test5", "test5"]}/>
             <ProfileCard tags={["Chemical Engin.", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2"]}/>
             <ProfileCard tags={["Chemical Engin.", "Advanced Degrees", "Cal Men's Rowing", "test1"]}/>
+            <ProfileCard name="Quimulous Dobby" degree="B.S. Computer Science" grad_date={2018} location="New York City, NY" tags={["Software Engineering", "Startups", "Venture Capital", "test1"]}/>
         </div>
       </div>
     </div>

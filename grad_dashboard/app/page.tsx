@@ -20,7 +20,7 @@ export default function Home() {
           <h2 className="text-xl mt-[40px] text-subtext font-normal">Follow in the footsteps of your institution’s alumni. Expand your network, gain professional insight, and develop your career goal—all with the help of voluntary mentors.</h2>
             <div>
               <MainButton on_click={() => router.push('/schools')} _classes="mt-[40px] mr-10 w-[200px]" text="Find Your School"/>
-              <MainButton on_click={() => router.push('/login')} _classes="mt-[40px] w-[200px]" text="Login"/>
+              <MainButton on_click={() => router.push('/dashboard')} _classes="mt-[40px] w-[200px]" text="Dashboard"/>
             </div>
 
           <hr className="mt-[100px] h-[2px] bg-black"/>
