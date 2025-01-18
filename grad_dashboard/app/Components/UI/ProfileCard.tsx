@@ -5,6 +5,7 @@ import { motion } from "framer-motion"
 import { useRouter } from "next/navigation";
 
 interface ProfileCardProps {
+    id?: number;
     name?: string;
     degree?: string;
     grad_date?: number;
@@ -12,8 +13,13 @@ interface ProfileCardProps {
     tags?: string[];
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({name = "Placeholder", degree = "B.A. Default Degree", grad_date = "1900", location = "Los Angeles, CA", tags = []}) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({id=0, name = "Placeholder", degree = "B.A. Default Degree", grad_date = "1900", location = "Los Angeles, CA", tags = []}) => {
     const router = useRouter();
+
+    const handleNavigation = () => {
+    
+        router.push(`/profiles/${id}?name=${name}`);
+    };
 
     return (
         <>
@@ -59,7 +65,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({name = "Placeholder", degree =
 
                     {/* Footer Arrow */}
                     <div id="card-footer" className="absolute bottom-0 right-0">
-                        <button className="m-4" onClick={() => router.push('/profiles/' + name)}>
+                        <button className="m-4" onClick={handleNavigation}>
                             <motion.div
                                 whileHover={{x: 5}}
                                 transition={{

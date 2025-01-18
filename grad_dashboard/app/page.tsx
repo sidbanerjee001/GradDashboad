@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <>
-      <div className="m-auto w-7/12 mt-5">
+      <div className="m-auto w-[75%] mt-5">
         <NavBar/>
         <div id="hero" className="mt-[150px]">
           <TypingText text="Create meaningful connections with alumni." speed={15} classes="text-5xl" />
