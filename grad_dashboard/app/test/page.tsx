@@ -1,11 +1,17 @@
+'use client'
+
 import NavBar from "@/app/Components/NavBar";
 import myImage from './headshot_1.jpg';
 import Image from "next/image";
+import CareerExperience from "../Components/CareerExperience";
+
+import { motion } from "framer-motion"
+import Link from "next/link";
   
-  export default function ProfilePage() {
+export default function ProfilePage() {
     const profileID = 0;
     const name = "John Deere";
-  
+
     return (
         <div key={profileID} className="bg-dark_background min-h-screen">
             <div className="m-auto w-[75%] py-5 text-white">
@@ -63,20 +69,51 @@ import Image from "next/image";
                         <p className="text-sm">Sport(s):</p>
                     </div>
 
+
                     <div id="blurb" className="w-[95%]">
                         <h3 className="text-sm">CONTACT INFO</h3>
                         <hr className="my-3"/>
-                        <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                            <motion.div
+                                whileHover={{ x: 10 }}
+                                transition={{
+                                    duration: 0.75,
+                                    ease: [0, 0.71, 0.2, 1.01]
+                                }}>
+                                <Link href="https://www.linkedin.com/in/sidbanerjee00/"><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ LinkedIn</p></Link>
+                            </motion.div>
+
+                        <br/>
+
+                        <motion.div
+                            whileHover={{ x: 10 }}
+                            transition={{
+                                duration: 0.75,
+                                ease: [0, 0.71, 0.2, 1.01]
+                            }}>
+                            <Link href="https://www.google.com"><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ Email</p></Link>
+                        </motion.div>
+
+                        <br/>
+
+                        <motion.div
+                            whileHover={{ x: 10 }}
+                            transition={{
+                                duration: 0.75,
+                                ease: [0, 0.71, 0.2, 1.01]
+                            }}>
+                            <Link href="https://www.calendly.com"><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ Calendly</p></Link>
+                        </motion.div>
                     </div>
 
                     <div id="blurb" className="w-[95%]">
                         <h3 className="text-sm">CAREER PATHWAY</h3>
                         <hr className="my-3"/>
-                        <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <CareerExperience yearStart={2025} yearEnd={"PRESENT"} role={"Researcher"} company={"CNMAT @ UC Berkeley"} description={"Studying morphisms between semantic clustering and [music] feature clustering, in pursuit of parameter embedding and network bending for stable audiovisual generation. Permits fine tuning of gen AI in a multimodal medium."} link={"https://cnmat.berkeley.edu/"}/>
                     </div>
                 </div>
             </div>
-      </div>
+        </div>
     );
-  }
+}
   
