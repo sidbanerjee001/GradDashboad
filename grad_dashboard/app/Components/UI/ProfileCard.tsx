@@ -4,6 +4,11 @@ import myImage from './headshot_1.jpg';
 import { motion } from "framer-motion"
 import { useRouter } from "next/navigation";
 
+type ResumeExperience = {
+    role: string;
+    summary: string;
+}
+
 interface ProfileCardProps {
     id?: number;
     name?: string;

@@ -3,20 +3,43 @@
 import NavBar from "@/app/Components/NavBar";
 import myImage from './headshot_1.jpg';
 import Image from "next/image";
-import CareerExperience from "../Components/CareerExperience";
+import CareerExperience from "../CareerExperience";
 
 import { motion } from "framer-motion"
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-interface TestProps {
-    tags?: string[];
+type ResumeExperience = {
+    start: string;
+    end: string;
+    role: string;
+    company: string;
+    summary: string;
+    link: string;
 }
 
-const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Resume Building", "Networking", "Life after College"]}) => { 
+type InlineLink = {
+    name: string;
+    link: string;
+}
+
+interface FullProfileProps {
+    name: string;
+    degree: string;
+    gradYear: number;
+    location: string;
+    tags?: string[];
+    
+    about: string;
+    discussion: string;
+
+    experiences: ResumeExperience[];
+    contactLinks?: InlineLink[];
+}
+
+const FullProfile: React.FC<FullProfileProps> = ({name, degree, gradYear, location, about, discussion, experiences, contactLinks=[], tags=["Greek Life", "Consulting", "Resume Building", "Networking", "Life after College"]}) => { 
     const router = useRouter();
     const profileID = 0;
-    const name = "John Deere";
 
     return (
         <div key={profileID} className="bg-dark_background min-h-screen">
@@ -34,7 +57,7 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
                     <div className="mx-10">
                         {/* Headings */}
                         <h1 className="text-[2rem]">{name}</h1>
-                        <h2 className="text-[1.2rem] pt-3">B.S. Computer Science, 2013</h2>
+                        <h2 className="text-[1.2rem] pt-3">{degree}, {gradYear}</h2>
 
                         {/* Location */}
                         <div className="mt-10 flex flex-row flex-start">
@@ -42,7 +65,7 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
                             </svg>
-                        <p className="text-xs mx-2">Denver, CO</p>
+                        <p className="text-xs mx-2">{location}</p>
                         </div>
 
                         {/* Tags */}
@@ -67,7 +90,7 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
 
                     {/* X button */}
                     <div className="absolute top-0 right-0">
-                        <button onClick={() => router.push("/dashboard")}>
+                        <button onClick={() => router.back()}>
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="size-6">
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
                             </svg>
@@ -88,7 +111,7 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
                         <div id="blurb" className="w-[95%]">
                             <h3 className="text-sm">ABOUT</h3>
                             <hr className="my-3"/>
-                            <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p className="text-sm">{about}</p>
                         </div>
                     </motion.div>
 
@@ -104,7 +127,7 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
                         <div id="blurb" className="w-[95%]">
                             <h3 className="text-sm">DISCUSSION TOPICS</h3>
                             <hr className="my-3"/>
-                            <p className="text-sm">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                            <p className="text-sm">{discussion}</p>
                         </div>
                     </motion.div>
 
@@ -120,9 +143,9 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
                         <div id="blurb" className="w-[95%]">
                             <h3 className="text-sm">CAREER PATHWAY</h3>
                             <hr className="my-3"/>
-                            <CareerExperience start={"JAN 2025"} end={"PRESENT"} role={"Researcher"} company={"CNMAT @ UC Berkeley"} description={"Studying morphisms between semantic clustering and [music] feature clustering, in pursuit of parameter embedding and network bending for stable audiovisual generation. Permits fine tuning of gen AI in a multimodal medium."} link={"https://cnmat.berkeley.edu/"}/>
-                            <CareerExperience start={"MAY"} end={"AUG 2024"} role={"SWE Intern"} company={"Tona AI"} description={"Full-stack developer for a startup integrating AI into the music production process. Cool work involving designing frontend UI/UX (React, Next.JS), developing backend ML models (PyTorch, LarsNet, Docker), and managing databases (AWS, Supabase)."} link={"https://www.tona.ai/"}/>
-                            <CareerExperience start={"JUN 2021"} end={"AUG 2022"} role={"Research Intern"} company={"Four Eyes Lab @ UCSB"} description={"Cognitive-science informed mappings from music to sculpture (1) in pursuit of meaningful synaesthetic artwork & exploring deep reinforcement learning as an experience in extended reality (2) i.e. live ML training in AR/VR. "} link={"https://www.tona.ai/"}/>
+                            {experiences.map((exp, key) => 
+                                <CareerExperience key={key} start={exp.start} end={exp.end} role={exp.role} company={exp.company} description={exp.summary} link={exp.link}/>
+                            )}
                         </div>
                     </motion.div>
 
@@ -138,37 +161,19 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
                         <div id="blurb" className="w-[95%]">
                             <h3 className="text-sm">CONTACT INFO</h3>
                             <hr className="my-3"/>
-
-                                <motion.div
-                                    whileHover={{ x: 10 }}
-                                    transition={{
-                                        duration: 0.75,
-                                        ease: [0, 0.71, 0.2, 1.01]
-                                    }}>
-                                    <Link href="https://www.linkedin.com/in/sidbanerjee00/"><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ LinkedIn</p></Link>
-                                </motion.div>
-
-                            <br/>
-
-                            <motion.div
-                                whileHover={{ x: 10 }}
-                                transition={{
-                                    duration: 0.75,
-                                    ease: [0, 0.71, 0.2, 1.01]
-                                }}>
-                                <Link href="https://www.google.com"><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ Email</p></Link>
-                            </motion.div>
-
-                            <br/>
-
-                            <motion.div
-                                whileHover={{ x: 10 }}
-                                transition={{
-                                    duration: 0.75,
-                                    ease: [0, 0.71, 0.2, 1.01]
-                                }}>
-                                <Link href="https://www.calendly.com"><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ Calendly</p></Link>
-                            </motion.div>
+                                {contactLinks.map((elem, key) => 
+                                    <div key={key}>
+                                        <motion.div
+                                        whileHover={{ x: 10 }}
+                                        transition={{
+                                            duration: 0.75,
+                                            ease: [0, 0.71, 0.2, 1.01]
+                                        }}>
+                                            <Link href={elem.link}><p className="transition ease-in-out duration:300 text-sm text-white hover:text-subtext">→ {elem.name}</p></Link>
+                                        </motion.div>
+                                        <br/>
+                                    </div>
+                                )}
                         </div>
                     </motion.div>
                 </div>
@@ -178,5 +183,5 @@ const ProfilePage: React.FC<TestProps> = ({tags=["Greek Life", "Consulting", "Re
 
 }
   
-export default ProfilePage;
+export default FullProfile;
   
