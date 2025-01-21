@@ -2,9 +2,8 @@
 
 import NavBar from "@/app/Components/NavBar";
 import Biography from "../Components/DashboardSettings/Biography";
+import Contact from "../Components/DashboardSettings/Contact";
 
-import { motion } from "framer-motion"
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -28,6 +27,7 @@ const ProfilePage: React.FC<TestProps> = ({}) => {
     const settings_content_map = new Map();
 
     settings_content_map.set("Biography", <Biography title={"Biography"}/>);
+    settings_content_map.set("Contact Information", <Contact title={"Contact Information"}/>);
 
     return (
         <div key={profileID} className="bg-dark_background min-h-screen">
@@ -39,8 +39,8 @@ const ProfilePage: React.FC<TestProps> = ({}) => {
                 </div>
 
                 {/* Sidebar */}
-                <div id="content" className="flex flex-row justify-between items-start mt-[40px] w-[90%] m-auto">
-                    <div id="sidebar" className="flex flex-col gap-y-[25px] items-start">
+                <div id="content" className="flex flex-row justify-between items-start mt-[40px]">
+                    <div id="sidebar" className="flex flex-col gap-y-[25px] items-start mr-10">
                         {settingsButtons.map((value, index) => (
                             <button onClick={() => changeCurrentSettings(value)} key={index} className="transition ease-in-out duration:300 bg-[#1B1B1B] hover:bg-[#282828] rounded-lg w-[200px] h-[40px] text-left"><h2 className={`text-sm pl-4 ${currentSetting===value ? "text-white" : "text-subtext"}`}>{value}</h2></button>
                         ))}
