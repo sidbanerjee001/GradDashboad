@@ -21,14 +21,6 @@ interface ExperienceProps {
 const ExperienceField: React.FC<ExperienceProps> = ({company, role, start, end, hyperlink="", description}) => {
     const [editMode, toggleEditMode] = useState(false);
 
-    useEffect(() => {
-        if(!editMode) {
-            return;
-        }
-
-
-    }, [editMode])
-
     return (
         <>
         {!editMode ? <div className="w-[700px] bg-[#242424] rounded-lg">
@@ -53,7 +45,7 @@ const ExperienceField: React.FC<ExperienceProps> = ({company, role, start, end, 
                     </div>
                     <div id="field" className="justify-self-end">
                         <h1 className="text-sm my-2">Role</h1>
-                        <input name="first_name" className="transition outline-none focus-within:border-blue-500 rounded-sm bg-[#393939] border-[1px] border-[#747474] text-sm h-[30px] w-[300px] p-2" placeholder={"Enter text here..."} defaultValue={description}/>
+                        <input name="first_name" className="transition outline-none focus-within:border-blue-500 rounded-sm bg-[#393939] border-[1px] border-[#747474] text-sm h-[30px] w-[300px] p-2" placeholder={"Enter text here..."} defaultValue={role}/>
                     </div>
 
                     <div id="field" className="justify-self-start">
@@ -75,9 +67,7 @@ const ExperienceField: React.FC<ExperienceProps> = ({company, role, start, end, 
             </div>
         </div>}
         </>
-
     )
-
 }
 
 const Career: React.FC<CareerProps> = ({title}) => {
