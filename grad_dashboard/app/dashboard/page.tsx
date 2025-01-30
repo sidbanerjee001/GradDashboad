@@ -16,7 +16,7 @@ export default function Schools() {
         <div id="hero" className="mt-[150px]">
             <TypingText text="Alumni Profiles" speed={15} classes="text-5xl" />
         </div>
-        <div id="profiles" className="grid grid-cols-3 mt-10">
+        <div id="profiles" className="grid grid-cols-4 mt-10">
             <ProfileCard tags={["Chemical Engineering", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2", "test5"]}/>
             <ProfileCard tags={["Chemical Engin.", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2"]}/>
             <ProfileCard tags={["Chemical Engin.", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2", "test5", "test5", "test5"]}/>

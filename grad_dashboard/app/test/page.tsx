@@ -6,6 +6,7 @@ import Contact from "../Components/DashboardSettings/Contact";
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import Career from "../Components/DashboardSettings/Career";
 
 interface TestProps {
     tags?: string[];
@@ -19,7 +20,7 @@ const ProfilePage: React.FC<TestProps> = ({}) => {
     const [currentSetting, changeCurrentSettings] = useState("Biography");
 
     useEffect(() => {
-        console.log(currentSetting);
+        // console.log(currentSetting);
     }, [currentSetting]);
 
     const settingsButtons = ["Biography", "Contact Information", "Career Experience", "Privacy Settings"]
@@ -28,6 +29,7 @@ const ProfilePage: React.FC<TestProps> = ({}) => {
 
     settings_content_map.set("Biography", <Biography title={"Biography"}/>);
     settings_content_map.set("Contact Information", <Contact title={"Contact Information"}/>);
+    settings_content_map.set("Career Experience", <Career title={"Career Experience"}/>);
 
     return (
         <div key={profileID} className="bg-dark_background min-h-screen">
