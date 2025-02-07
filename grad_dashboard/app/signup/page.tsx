@@ -34,14 +34,18 @@ export default function SignUp() {
     }
 
     try {
-      const { user } = await signUp(email, password);
-      if (user) router.push("/setup-profile");
-      setMessage("Check your email for confirmation!");
+      const data = await signUp(email, password);
+      console.log("Sign-up response:", data);
+    
+      if (data.user) {
+        router.push("/setup-profile");
+      } else {
+        setMessage("User is null, something went wrong.");
+      }
     } catch (error: any) {
+      console.error("Signup error:", error);
       setMessage(error.message);
-    }
-
-    setLoading(false);
+    }    
   };
 
   useEffect(() => {

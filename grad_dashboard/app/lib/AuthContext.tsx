@@ -18,27 +18,27 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [profile, setProfile] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const fetchProfile = useCallback(async () => {
+  const fetchProfile = useCallback(async (forceFetch = false) => {
     if (!user) return;
 
     const savedProfile = sessionStorage.getItem("profile");
-    if (savedProfile) {
-      setProfile(JSON.parse(savedProfile));
+    if (savedProfile && !forceFetch) {
+        setProfile(JSON.parse(savedProfile));
     } else {
-      const { data: profileData, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
+        const { data: profileData, error } = await supabase
+            .from("profiles")
+            .select("*")
+            .eq("id", user.id)
+            .single();
 
-      if (error) {
-        console.error("Error fetching profile:", error);
-      } else {
-        setProfile(profileData as Profile);
-        sessionStorage.setItem("profile", JSON.stringify(profileData));
-      }
+        if (error) {
+            return;
+        } else {
+            setProfile(profileData as Profile);
+            sessionStorage.setItem("profile", JSON.stringify(profileData));
+        }
     }
-  }, [user]);
+}, [user]);
 
   useEffect(() => {
     const fetchUser = async () => {

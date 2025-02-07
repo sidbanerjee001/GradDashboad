@@ -1,13 +1,11 @@
 'use client'
 
-import { Button } from '@headlessui/react'
 import { useRouter } from 'next/navigation'
 
 import { useAuth } from "./lib/AuthContext";
 
 import NavBar from './Components/NavBar';
 import Footer from './Components/Footer';
-import { useEffect } from 'react';
 
 export default function Redesign() {
     const { user, loading } = useAuth();
@@ -15,7 +13,7 @@ export default function Redesign() {
 
     return (
     <>
-    <div className="h-screen flex items-center justify-center bg-gradient-to-t from-white to-blue-100">
+    <div className="flex items-center justify-center bg-gradient-to-b from-white to-blue-50">
         <div className="m-auto w-[75%]">
             <NavBar/>
 
@@ -25,7 +23,7 @@ export default function Redesign() {
                     <h2 className="text-lg text-gray-500 font-medium mt-8 w-[80%] m-auto">Follow in the footsteps of your institution’s alumni. Expand your network, gain professional insight, and develop your career goal. All with the help of voluntary mentors.</h2>
                 </div>
 
-                <div className="flex flex-row items-center justify-center mt-8">
+                <div className="flex flex-row items-center justify-center mt-14">
                     <button className="flex items-center rounded-md border border-slate-300 py-2 px-6 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mx-4" type="button" onClick={() => router.push("/dashboard")}>
                     {user ? <>Dashboard</> : <>Search</>}
                     </button>
@@ -36,7 +34,7 @@ export default function Redesign() {
                 </div>
             </div>
 
-            <div id="dashboard-img" className="mt-[175px] p-2 bg-slate-200 rounded-lg">
+            <div id="dashboard-img" className="mt-[150px] p-2 bg-slate-200 rounded-lg">
                 <img src={"https://mui.com/static/screenshots/material-ui/getting-started/templates/dashboard.jpg"}/>
             </div>
 
