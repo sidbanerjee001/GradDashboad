@@ -27,7 +27,7 @@ const ResizableTextBox: React.FC<ResizableTextBoxProps> = ({ minHeight, placehol
       value={value}
       onChange={handleChange}
       placeholder={placeholder}
-      className={`w-full p-2 outline-none focus-within:border-blue-500 rounded-sm bg-[#393939] border-[1px] border-[#747474] text-sm resize-y min-h-[${minHeight}px]`}
+      className={`w-full outline-none text-slate-700 border-[1.2px] rounded-lg shadow-sm p-2 focus:outline-blue-400 text-sm resize-y min-h-[${minHeight}px]`}
       style={{ minHeight: `${minHeight}px` }}
     />
   );

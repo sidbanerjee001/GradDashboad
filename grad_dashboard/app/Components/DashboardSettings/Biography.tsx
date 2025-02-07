@@ -5,21 +5,20 @@ import { motion } from "framer-motion"
 
 interface BiographyProps {
     title: string;
+    first_name: string;
+    last_name: string;
+    degree?: string;
+    grad_date?: string;
+    location?: string;
 } 
 
-const Biography: React.FC<BiographyProps> = ({title}) => {
-  const firstName = "Quimbulous";
-  const lastName = "Dobby";
-  const degree = "B.S. Computer Science";
-  const gradYear = 2013;
-  const location = "Denver, CO"
-
-  const fields = [["First Name", "Quimbulous"], ["Last Name", "Dobby"], ["Degree", "B.S. Computer Science"], ["Graduation Date", 2013], ["Location", "Denver, CO"]]
+const Biography: React.FC<BiographyProps> = ({title, first_name, last_name, location="Berkeley, CA", degree="B.S. Computer Science", grad_date=2013}) => {
+  const fields = [["First Name", first_name], ["Last Name", last_name], ["Degree", degree], ["Graduation Date", grad_date], ["Location", location]]
 
   return (
     <div id="biography-panel" className="relative">
         <div id="biography-panel-inner">
-            <h1 className="text-white font-semibold text-xl">{title}</h1>
+            <h1 className="text-slate-700 font-semibold text-xl">{title}</h1>
             {/* <hr className="my-4"/> */}
             <div id="inputs" className="pt-[40px] pb-[100px] grid grid-cols-2 gap-x-[150px] gap-y-[40px]">
                 {fields.map((value, index) => (
@@ -34,13 +33,13 @@ const Biography: React.FC<BiographyProps> = ({title}) => {
                         key={value[0]}
                     >
                         <div id="text-field" className="flex flex-col">
-                            <p className="font-semibold text-xs text-white uppercase">{value[0]}</p>
-                            <input name="first_name" className="transition ease-in-out duration-150 mt-2 bg-[#1B1B1B] border-b-2 border-[#282828] h-[35px] w-[300px] text-sm outline-none focus:border-white" defaultValue={value[1]}/>
+                            <p className="font-semibold text-xs text-slate-700 uppercase">{value[0]}</p>
+                            <input name="first_name" className="mt-2 outline-none w-[300px] text-sm text-slate-700 border-[1.2px] rounded-lg shadow-sm px-2 py-2 focus:outline-blue-400" defaultValue={value[1]}/>
                         </div>
                     </motion.div>
                 ))}
             </div>
-            <button className="transition ease-in-out duration:300 absolute mt-[40px] mb-[20px] bottom-0 right-0 bg-[#282828] w-[60px] h-[30px] rounded-md text-sm hover:bg-[#353535]">Save</button>
+            <button className="absolute mt-[40px] mb-[20px] bottom-0 right-0 text-sm font-medium text-white bg-sky-900 py-[5px] px-3 hover:bg-sky-700 rounded-md transition">Save</button>
         </div>
     </div>
   );

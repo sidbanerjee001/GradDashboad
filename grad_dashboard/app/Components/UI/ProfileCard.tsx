@@ -22,10 +22,10 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ id = 0, name = "Placeholder",
     return (
         <div
             id="card-wrapper"
-            className="mt-[40px] bg-[#282828] w-[250px] rounded-md border-[1px] border-[#99999920] flex flex-col"
+            className="mt-[40px] bg-[#ffffff] w-[275px] rounded-md border-[1px] border-[#99999920] flex flex-col shadow-xl"
         >
             {/* Image */}
-            <div className="w-full h-[150px] relative rounded-t-md overflow-hidden">
+            <div className="w-full h-[200px] relative rounded-t-md overflow-hidden">
                 <Image
                     src={myImage}
                     alt={`${name}'s profile picture`}
@@ -80,7 +80,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ id = 0, name = "Placeholder",
                             key={index}
                             className="text-[9px] font-bold uppercase bg-[#2ECC7120] rounded-[10px] flex flex-row items-center"
                         >
-                            <p className="py-[4px] px-[8px] text-[#2ECC71]">{tag}</p>
+                            <p className="py-[4px] px-[8px] text-green-600">{tag}</p>
                         </div>
                     ))}
                     {tags.length > 3 ? (
@@ -89,7 +89,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ id = 0, name = "Placeholder",
                             key={name + '_extra_tag'}
                             className="text-[9px] font-semibold uppercase bg-[#2ECC7120] rounded-[10px]"
                         >
-                            <p className="py-[4px] px-[8px] text-[#2ECC71]">
+                            <p className="py-[4px] px-[8px] text-green-600">
                                 +{tags.length - 3}
                             </p>
                         </div>
@@ -100,7 +100,7 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ id = 0, name = "Placeholder",
             {/* Footer Button */}
             <div id="card-footer" className="mt-auto p-3">
                 <button
-                    className="w-full py-1 text-sm rounded-md bg-[#424242] hover:bg-[#242424] hover:text-white transition"
+                    className="w-full py-1 text-sm rounded-md bg-blue-500 hover:bg-blue-400 text-white transition"
                     onClick={handleNavigation}
                 >
                     View More

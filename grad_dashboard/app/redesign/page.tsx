@@ -3,17 +3,14 @@
 import { Button } from '@headlessui/react'
 import { useRouter } from 'next/navigation'
 
-import { useAuth } from "./lib/AuthContext";
-
-import NavBar from './Components/NavBar';
-import Footer from './Components/Footer';
-import { useEffect } from 'react';
+import NavBar from "../Components/NavBar" 
+import Footer from '../Components/Footer'
 
 export default function Redesign() {
-    const { user, loading } = useAuth();
-    const router = useRouter();
+  const router = useRouter();
+  return (
 
-    return (
+
     <>
     <div className="h-screen flex items-center justify-center bg-gradient-to-t from-white to-blue-100">
         <div className="m-auto w-[75%]">
@@ -26,17 +23,17 @@ export default function Redesign() {
                 </div>
 
                 <div className="flex flex-row items-center justify-center mt-8">
-                    <button className="flex items-center rounded-md border border-slate-300 py-2 px-6 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mx-4" type="button" onClick={() => router.push("/dashboard")}>
-                    {user ? <>Dashboard</> : <>Search</>}
+                    <button className="flex items-center rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mx-4" type="button" onClick={() => router.push('/dashboard')}>
+                    Search
                     </button>
 
-                    <button className="flex items-center rounded-md border border-slate-300 py-2 px-6 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mx-4" type="button" onClick={() => router.push(`${user ? "/test" : "/signup"}`)}>
-                    {user ? <>Settings</> : <>Sign Up</>}
+                    <button className="flex items-center rounded-md border border-slate-300 py-2 px-4 text-center text-sm transition-all shadow-sm hover:shadow-lg text-slate-600 hover:text-white hover:bg-slate-800 hover:border-slate-800 focus:text-white focus:bg-slate-800 focus:border-slate-800 active:border-slate-800 active:text-white active:bg-slate-800 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none mx-4" type="button">
+                    Log In
                     </button>
                 </div>
             </div>
 
-            <div id="dashboard-img" className="mt-[175px] p-2 bg-slate-200 rounded-lg">
+            <div id="dashboard-img" className="mt-[100px] p-2 bg-slate-200 rounded-lg">
                 <img src={"https://mui.com/static/screenshots/material-ui/getting-started/templates/dashboard.jpg"}/>
             </div>
 
@@ -61,7 +58,7 @@ export default function Redesign() {
 
                 <Footer/>
         </div>
-        </div>
+      </div>
     </>
-    )
+  )
 }

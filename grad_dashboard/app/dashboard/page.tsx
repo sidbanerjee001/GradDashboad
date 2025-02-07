@@ -1,20 +1,15 @@
 'use client'
 
 import NavBar from '@/app/Components/NavBar'
-import TypingText from '../Components/TypingText';
 import ProfileCard from '../Components/UI/ProfileCard';
-
-import { useRouter } from 'next/navigation'
-import { useEffect, useState } from 'react';
-import { motion } from "framer-motion"
 
 export default function Schools() {
   return (
-    <div className="bg-dark_background min-h-screen">
-      <div className="m-auto w-[75%] py-5 text-white">
-        <NavBar dark={true}/>
-        <div id="hero" className="mt-[150px]">
-            <TypingText text="Alumni Profiles" speed={15} classes="text-5xl" />
+    <div className="bg-white">
+      <div className="m-auto w-[75%]">
+        <NavBar/>
+        <div id="hero" className="mt-[100px]">
+        <h1 className="text-5xl text-slate-700 font-semibold m-auto text-center">Alumni Dashboard</h1>
         </div>
         <div id="profiles" className="grid grid-cols-4 mt-10">
             <ProfileCard tags={["Chemical Engineering", "Advanced Degrees", "Cal Men's Rowing", "test1", "test2", "test5"]}/>

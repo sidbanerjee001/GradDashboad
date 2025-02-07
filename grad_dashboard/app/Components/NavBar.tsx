@@ -1,23 +1,33 @@
-import MainButton from '@/app/Components/UI/MainButton'
-import { Bars3Icon } from '@heroicons/react/24/outline'
+import { Button } from '@headlessui/react'
+import { useRouter } from 'next/navigation'
 
-interface NavBarProps {
-  dark?: boolean;
-}
+const navigation = [
+  { name: 'Dashboard', href: '/dashboard', current: true },
+  { name: 'Team', href: '#', current: false },
+  { name: 'Projects', href: '#', current: false },
+  { name: 'Calendar', href: '#', current: false },
+]
 
-const NavBar: React.FC<NavBarProps> = ({ dark = false }) => {
+export default function NavBar() {
+  const router = useRouter();
   return (
-    <nav className="flex items-center justify-between">
-      <a href="/" className="text-lg">Logo</a>
-      <div className="flex">
-        <MainButton _classes="mx-5" dark={dark} text="Log In" />
-        <MainButton _classes="mx-5" dark={dark} text="About" />
-        <button className="mx-5">
-          <Bars3Icon className="h-8 w-8" />
-        </button>
+    <>
+      <div className="shadow-md rounded-b-xl bg-slate-50 flex flex-row justify-between items-center">
+        <div id="left" className="mx-5 flex flex-row my-3">
+          <h1 className="font-semibold text-gray-700">Logo</h1>
+          <div className="mx-5">
+            {navigation.map((data, key) => (
+              <button key={key} className="mx-2 text-sm font-medium text-gray-500 hover:text-gray-800 transition" onClick={() => router.push(data.href)}>{data.name}</button>
+            ))}
+          </div>
+        </div>
+        <div id="right" className="mx-5 my-3">
+            <div className="flex flex-row">
+              <button className="mx-3 text-sm font-medium text-gray-500 hover:text-sky-900 transition" onClick={() => router.push("/login")}>Log In</button>
+              <button className="mx-3 text-sm font-medium text-white bg-sky-900 p-2 hover:bg-sky-700 rounded-md transition" onClick={() => router.push("/signup")}>Sign Up</button>
+            </div>
+        </div>
       </div>
-    </nav>
-  );
-};
-
-export default NavBar;
+    </>
+  )
+}
