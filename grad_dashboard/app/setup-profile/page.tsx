@@ -38,12 +38,20 @@ export default function SetupProfile() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return;
 
-    const { error } = await supabase
+    const { error: profileError } = await supabase
       .from("profiles")
       .insert([{ id: user.id, first_name: firstName, last_name: lastName, email: user.email }]);
+    
+    const { error: experienceError } = await supabase
+      .from("career")
+      .insert([{ id: user.id, experiences: null  }]);
 
-    if (error) console.log(error);
-    if (!error) router.push("/dashboard");
+    if (profileError || experienceError) {
+      console.log(profileError);
+      console.log(experienceError);
+      return;
+    }
+    router.push("/dashboard");
     setLoading(false);
   };
 

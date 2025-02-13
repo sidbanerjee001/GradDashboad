@@ -18,7 +18,7 @@ export default function Login() {
       return;
     }
 
-    router.push("/dashboard"); // Redirect after login
+    router.push("/network");
   };
 
   return (

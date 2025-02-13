@@ -2,18 +2,20 @@ import { motion } from "framer-motion";
 import { supabase } from "../../lib/supabaseClient";
 import { useEffect, useState } from "react";
 
+import { updateContactLinks } from "@/app/lib/supabase-methods";
+
 interface ContactProps {
     title: string;
     email: string;
-    links: {
+    links?: {
         LinkedIn: string;
         Facebook: string;
         Calendly: string;
     };
     updateFn: Function;
 }
+
 const Contact: React.FC<ContactProps> = ({ title, email, links = { LinkedIn: "", Calendly: "", Facebook: "" }, updateFn }) => {
-    const ls = [["LinkedIn", links?.LinkedIn ?? ""], ["Email", email], ["Calendly", links?.Calendly ?? ""], ["Facebook", links?.Facebook ?? ""]];
     const [linkValues, setLinkValues] = useState({
         LinkedIn: links?.LinkedIn ?? "",
         Email: email,
@@ -43,18 +45,20 @@ const Contact: React.FC<ContactProps> = ({ title, email, links = { LinkedIn: "",
 
     const handleSubmit = async (event: React.FormEvent) => {
         event.preventDefault();
-    
+
         const { data: { user } } = await supabase.auth.getUser();
         if (!user) {
             return;
         }
-    
+
         try {
-            await updateFn(user.id, {
+            await updateContactLinks(user.id, {
                 LinkedIn: linkValues.LinkedIn,
                 Calendly: linkValues.Calendly,
                 Facebook: linkValues.Facebook
             });
+
+            await updateFn();
             alert('Profile updated successfully');
         } catch (error) {
             alert('Error updating profile');
@@ -66,7 +70,7 @@ const Contact: React.FC<ContactProps> = ({ title, email, links = { LinkedIn: "",
             <div id="contact-panel-inner">
                 <h1 className="text-slate-700 font-semibold text-xl">{title}</h1>
                 <div id="inputs" className="pt-[40px] pb-[100px] grid grid-cols-2 gap-x-[150px] gap-y-[40px]">
-                    {ls.map((value, index) => (
+                    {Object.entries(linkValues).map(([key, value], index) => (
                         <motion.div
                             initial={{ y: 25, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
@@ -75,15 +79,15 @@ const Contact: React.FC<ContactProps> = ({ title, email, links = { LinkedIn: "",
                                 delay: 0.075 * index,
                                 ease: [0, 0.71, 0.2, 1.01]
                             }}
-                            key={value[0]}
+                            key={key}
                         >
                             <div id="text-field" className="flex flex-col">
-                                <p className="font-semibold text-xs text-slate-700 uppercase">{value[0]}</p>
+                                <p className="font-semibold text-xs text-slate-700 uppercase">{key}</p>
                                 <input
-                                    name={value[0].toLowerCase()}
+                                    name={key.toLowerCase()}
                                     className="mt-2 outline-none w-[300px] text-sm text-slate-700 border-[1.2px] rounded-lg shadow-sm px-2 py-2 focus:outline-blue-400"
-                                    value={linkValues[value[0] as keyof typeof linkValues]}
-                                    onChange={(e) => updateLinkValue(value[0], e.target.value)}
+                                    value={value}
+                                    onChange={(e) => updateLinkValue(key, e.target.value)}
                                 />
                             </div>
                         </motion.div>

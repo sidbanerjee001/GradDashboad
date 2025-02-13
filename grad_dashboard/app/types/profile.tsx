@@ -4,7 +4,9 @@ export interface Profile {
     last_name: string;
     email: string;
     created_at: string;
-    updated_at: string;
+    degree: string;
+    location: string;
+    grad_date: string;
 
     ContactLinks: {
       LinkedIn: string;

@@ -9,7 +9,8 @@ import { useEffect, useState } from "react";
 import Career from "../Components/DashboardSettings/Career";
 import PrivacySettings from "../Components/DashboardSettings/PrivacySettings";
 import { useAuth } from "../lib/AuthContext";
-import { supabase } from "../lib/supabaseClient";
+
+import { updateContactLinks } from "../lib/supabase-methods";
 
 interface TestProps {
     tags?: string[];
@@ -21,52 +22,39 @@ const ProfilePage: React.FC<TestProps> = ({}) => {
     const [currentSetting, changeCurrentSettings] = useState("Biography");
 
     useEffect(() => {
-        if (!loading && !profile) {
+        if (!loading && !user) {
+            router.replace("/");
+        }
+    }, [loading, user, router]);
+
+    useEffect(() => {
+        if (!loading && user && !profile) {
             fetchProfile();
         }
-    }, [loading, profile, fetchProfile]);
+    }, [loading, user, profile, fetchProfile]);
 
     if (loading || !profile) {
-        return <div>Loading profile...</div>;
+        return (
+            <div className="flex justify-center items-center h-screen text-white">
+                <p>Loading profile...</p>
+            </div>
+        );
     }
 
-    async function updateContactLinks(userId: string, contactLinks: {
-        LinkedIn?: string;
-        Calendly?: string;
-        Facebook?: string;
-    }) {
-        try {
-            const { data, error } = await supabase
-                .from('profiles')
-                .upsert({
-                    id: userId,
-                    ContactLinks: contactLinks
-                }, {
-                    onConflict: 'id'
-                });
-    
-            if (error) {
-                throw error;
-            }
-    
-            // Clear the cached profile data
-            sessionStorage.removeItem("profile");
-    
-            // Fetch the updated profile
-            await fetchProfile();
-        } catch (error) {
-            console.error('Error in updateContactLinks:', error);
-        }
+    async function refresh() {
+        sessionStorage.removeItem("profile");
+
+        await fetchProfile();
     }
 
-    const { first_name, last_name, email, ContactLinks } = profile;
+    const { first_name, last_name, email, ContactLinks, location, degree, grad_date } = profile;
     const name = first_name + " " + last_name;
 
     const settingsButtons = ["Biography", "Contact Information", "Career Experience", "Privacy Settings"];
     const settings_content_map = new Map([
-        ["Biography", <Biography key="bio" title={"Biography"} first_name={first_name} last_name={last_name} />],
-        ["Contact Information", <Contact key={`contact-${ContactLinks?.LinkedIn}-${ContactLinks?.Calendly}-${ContactLinks?.Facebook}`} title={"Contact Information"} email={email} links={ContactLinks} updateFn={updateContactLinks} />],
-        ["Career Experience", <Career key="career" title={"Career Experience"} />],
+        ["Biography", <Biography key="bio" title={"Biography"} first_name={first_name} last_name={last_name} location={location} degree={degree} grad_date={grad_date} updateFn={refresh}/>],
+        ["Contact Information", <Contact key={`contact-${ContactLinks?.LinkedIn}-${ContactLinks?.Calendly}-${ContactLinks?.Facebook}`} title={"Contact Information"} email={email} links={ContactLinks} updateFn={refresh} />],
+        ["Career Experience", <Career key="career" title={"Career Experience"} userId={user.id}/>],
         ["Privacy Settings", <PrivacySettings key="privacy" title={"Privacy Settings"} />]
     ]);
 
